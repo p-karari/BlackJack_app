@@ -1,92 +1,89 @@
+let buttons = document.querySelectorAll("#btn")
+let text = document.querySelectorAll(".txt")
+let cards_value = document.querySelectorAll("#cards")
+let random_card
+let sum = 0
+let new_card
+let sumValue = ("sum : ")
+let sum1
+cards_value[1].textContent = sumValue
+let cardValue = ("cards : ")
 
-// let countEl = document.getElementById("count-el")
-// let count = 0 
-// function increment() {
-//    count += 1
-//    countEl.innerText = count
-
-// }
-
-// function save() {
-//    saveEl = document.getElementById("save-el")
-   
-//    saveEl.innerText += " " + count + " -  "
-//    console.log(saveEl)
-   
-//    countEl.innerText = 0
-//    count = 0
-// }
-
-
-// let welcomeEl = document.getElementById("welcome-el")
-
-// let Name = "Lvin"
-// let greeting = "Hi , my name is "
-
-// welcomeEl.innerText = greeting + Name
-
-// let num1 = 10
-// let num2 = 5
-// document.getElementById("num-1").textContent = num1
-// document.getElementById("num-2").textContent = num2
-
-// function addFunction() {
-//    let ans = document.getElementById("total").textContent  = num1 + num2
-// }
-// function subtractFunction() {
-//    let ans = document.getElementById("total").textContent = num1 - num2
- 
-// }
-// function divideFunction() {
-//    let ans = document.getElementById("total").textContent = num1 / num2
-
-// }
-// function multiplyFunction() {
-//    let ans = document.getElementById("total")
-//    ans.textContent = num1 * num2
-   
-// }
-
-// console.log(5 === 2)
-// console.log(3 > 2)
+cards_value[0].textContent = cardValue
 
 
 
+cards[1].textContent = sumValue
+text[0].textContent = ("~~  click start game button to begin  ~~")
+text[1].textContent = (" ~~~~")
 
-let firstCard = 6
-
- let secondCard = 9
- let sum = firstCard + secondCard
-let gameStatus = document.getElementById("game-status")
-let card1 = document.getElementById("cards").textContent = ("Cards :") + firstCard + "   " + secondCard
-let sumEl = document.getElementById("sum-el").textContent = ("Sum :") + sum
-function renderGame() {
-        startGame()
-    }
-function startGame() {
-    let sumEl = document.getElementById("sum-el").textContent = ("Sum :") + sum
-    if (sum <= 20) {
-        gameStatus.textContent = ("Do you want to draw a new card? ")
-        console.log("Do you want to draw a new card? ")
-    }
-    else if (sum === 21) {
-        gameStatus.textContent = ("You've got Blackjack!")
-        console.log("Whoo! you've got blackjack!")
-    }
-    else {
-        gameStatus.textContent = ("You're out of the game!")
-        console.log("You're out of the game!")
-    }
-
-    
+function newGame(){
+    random_card = Math.floor(Math.random() * 20)
+    cardValue = cardValue + random_card
+    text[0].textContent = ("~~  Game in progress  ~~")
+    cards_value[0].textContent = cardValue
+    cards_value[1].textContent = sumValue
+    text[1].textContent = (" ~~~~")
+    return random_card
 }
-function newCard() {
+
+function newCard(){
     
-    let drawedcard = 4
-    sum += drawedcard
-    console.log(sum)
-    renderGame()
+    new_card = Math.floor(Math.random()*15)
+    cardValue += (" - ") + new_card 
+    cards_value[0].textContent = cardValue
+    sum1 = random_card + new_card
+    random_card = 0
+    return new_card
+}
+
+function printSum() {
+    sum += sum1
+    cards_value[1].textContent = sumValue + sum
+    if(sum === 21) {
+        text[1].textContent = ("~~  Whoo! you've got blackjack  ~~")
+        text[0].textContent = ("~~  click start game button to restart  ~~")
+        cardValue = ("cards : ")
+        cards_value[0].textContent = cardValue
+        cards_value[1].textContent = sumValue
+        sum = 0
+    } else if(sum < 21){
+        text[1].textContent = ("~~  do you want to draw a new card  ~~")
+    }else {
+        text[0].textContent = ("~~  click start game button to restart  ~~")
+        text[1].textContent = ("~~  You're out of the game  ~~")
+       cardValue = ("cards : ")
+       cards_value[0].textContent = cardValue
+       cards_value[1].textContent = sumValue
+        sum = 0
+        sum1 = 0
+        
+    }
+   
 
 }
+
+buttons[0].addEventListener('click' , function(){
+    cards_value[0].textContent = cards_value
+    newGame()
+})
+
+buttons[1].addEventListener('click' , function(){
+    newCard()
+    printSum()
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
